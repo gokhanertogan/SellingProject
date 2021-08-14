@@ -29,12 +29,14 @@ namespace IdentityService.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IIdentityService, IdentityService.Api.Application.Services.IdentityService>();
+            services.ConfigureConsul(Configuration);
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "IdentityService.Api", Version = "v1" });
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
