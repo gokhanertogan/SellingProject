@@ -1,5 +1,4 @@
-﻿using BasketService.Api.Core.Application.Service;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
