@@ -46,7 +46,7 @@ namespace EventBus.RabbitMQ
                 persistentConnection.TryConnect();
             }
 
-            consumerChannel.QueueUnbind(queue: eventName, exchange: EventBusConfig.DefaultTopicName, routingKey: eventName);
+            consumerChannel.QueueUnbind(queue: GetSubName(eventName), exchange: EventBusConfig.DefaultTopicName, routingKey: eventName);
 
             if (SubsManager.IsEmpty)
             {

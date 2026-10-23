@@ -143,7 +143,7 @@ namespace CatalogService.Api.Controllers
         }
 
         [HttpGet]
-        [Route("items/type/all/brand/{catalogBrnadId:int}")]
+        [Route("items/type/all/brand/{catalogBrandId:int}")]
         [ProducesResponseType(typeof(PaginatedItemsViewModel<CatalogItem>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<PaginatedItemsViewModel<CatalogItem>>> ItemsByBrandIdAsync(int? catalogBrandId, [FromQuery] int pageSize = 10, [FromQuery] int pageIndex = 0)
         {

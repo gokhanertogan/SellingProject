@@ -64,8 +64,17 @@ namespace CatalogService.Api.Controllers
 
         private string GetImageMimeTypeFromImageFileExtension(string imageFileExtension)
         {
-            string mimeType="";
-            return mimeType;
+            switch (imageFileExtension.ToLowerInvariant())
+            {
+                case ".png": return "image/png";
+                case ".gif": return "image/gif";
+                case ".jpg":
+                case ".jpeg": return "image/jpeg";
+                case ".bmp": return "image/bmp";
+                case ".svg": return "image/svg+xml";
+                case ".webp": return "image/webp";
+                default: return "application/octet-stream";
+            }
         }
     }
 }

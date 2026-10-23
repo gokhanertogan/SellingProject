@@ -24,11 +24,12 @@ namespace EventBus.Base.Events
 
         public virtual string ProcessEventName(string eventName)
         {
-            if (EventBusConfig.DeleteEventPrefix)
-                eventName = eventName.TrimStart(EventBusConfig.EventNamePrefix.ToArray());
+            // Remove the exact prefix/suffix strings (TrimStart/TrimEnd would strip any of their characters).
+            if (EventBusConfig.DeleteEventPrefix && eventName.StartsWith(EventBusConfig.EventNamePrefix))
+                eventName = eventName.Substring(EventBusConfig.EventNamePrefix.Length);
 
-            if (EventBusConfig.DeleteEventSuffix)
-                eventName = eventName.TrimEnd(EventBusConfig.EventNameSuffix.ToArray());
+            if (EventBusConfig.DeleteEventSuffix && eventName.EndsWith(EventBusConfig.EventNameSuffix))
+                eventName = eventName.Substring(0, eventName.Length - EventBusConfig.EventNameSuffix.Length);
 
             return eventName;
         }
@@ -58,7 +59,7 @@ namespace EventBus.Base.Events
                 {
                     foreach (var subscription in subscriptions)
                     {
-                        var handler = ServiceProvider.GetService(subscription.HandlerType);
+                        var handler = scope.ServiceProvider.GetService(subscription.HandlerType);
                         if (handler == null)
                             continue;
 

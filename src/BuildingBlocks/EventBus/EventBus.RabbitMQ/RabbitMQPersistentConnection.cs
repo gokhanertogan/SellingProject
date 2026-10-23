@@ -60,7 +60,7 @@ namespace EventBus.RabbitMQ
 
         private void Connection_ConnectionBlocked(object sender, global::RabbitMQ.Client.Events.ConnectionBlockedEventArgs e)
         {
-            if (!_disposed)
+            if (_disposed)
                 return;
 
             TryConnect();
@@ -68,7 +68,7 @@ namespace EventBus.RabbitMQ
 
         private void Connection_CallbackException(object sender, global::RabbitMQ.Client.Events.CallbackExceptionEventArgs e)
         {
-            if (!_disposed)
+            if (_disposed)
                 return;
 
             TryConnect();
@@ -77,7 +77,7 @@ namespace EventBus.RabbitMQ
         private void Connection_ConnectionShutdown(object sender, ShutdownEventArgs e)
         {
             //log
-            if (!_disposed)
+            if (_disposed)
                 return;
 
             TryConnect();
